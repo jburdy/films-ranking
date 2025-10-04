@@ -1,2 +1,2 @@
-questionary==2.0.1
-trueskill==0.4.5
+questionary
+trueskill
