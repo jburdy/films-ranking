@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Classement de Films - Pair Ranking</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <div class="container">
+        <!-- Écran de démarrage -->
+        <div id="start-screen" class="screen">
+            <h1>🎬 Classement de Films</h1>
+            <p>Comparez des paires de films pour créer votre classement personnel</p>
+
+            <form id="start-form">
+                <div class="form-group">
+                    <label for="user-name">Votre nom :</label>
+                    <input type="text" id="user-name" name="user_name" required placeholder="Entrez votre nom">
+                </div>
+
+                <div class="form-group">
+                    <label for="max-comparisons">Nombre de comparaisons :</label>
+                    <select id="max-comparisons" name="max_comparisons">
+                        <option value="20">Rapide (20 comparaisons)</option>
+                        <option value="50" selected>Standard (50 comparaisons)</option>
+                        <option value="100">Complet (100 comparaisons)</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Commencer le classement</button>
+            </form>
+        </div>
+
+        <!-- Écran de comparaison -->
+        <div id="comparison-screen" class="screen hidden">
+            <div class="header">
+                <h2>Comparaison <span id="comparison-count">0</span> / <span id="max-comparisons-display">50</span></h2>
+                <div class="progress-bar">
+                    <div id="progress-fill" class="progress-fill"></div>
+                </div>
+            </div>
+
+            <div class="comparison-container">
+                <div class="film-card" id="film-a">
+                    <div class="film-header">
+                        <h3>FILM A</h3>
+                    </div>
+                    <div class="film-content">
+                        <div class="film-genre" id="film-a-genre"></div>
+                        <div class="film-category" id="film-a-category"></div>
+                        <div class="film-description" id="film-a-description"></div>
+                    </div>
+                    <button class="btn btn-film" data-choice="1">Choisir A</button>
+                </div>
+
+                <div class="vs-divider">
+                    <span>VS</span>
+                </div>
+
+                <div class="film-card" id="film-b">
+                    <div class="film-header">
+                        <h3>FILM B</h3>
+                    </div>
+                    <div class="film-content">
+                        <div class="film-genre" id="film-b-genre"></div>
+                        <div class="film-category" id="film-b-category"></div>
+                        <div class="film-description" id="film-b-description"></div>
+                    </div>
+                    <button class="btn btn-film" data-choice="2">Choisir B</button>
+                </div>
+            </div>
+
+            <div class="comparison-actions">
+                <button class="btn btn-secondary" id="equal-btn">Égalité</button>
+                <button class="btn btn-secondary" id="skip-btn">Passer</button>
+                <button class="btn btn-danger" id="stop-btn">Arrêter</button>
+            </div>
+        </div>
+
+        <!-- Écran de résultats -->
+        <div id="results-screen" class="screen hidden">
+            <h2>🎯 Votre Classement Personnel</h2>
+            <div class="results-info">
+                <p><strong>Comparaisons effectuées :</strong> <span id="final-comparisons">0</span></p>
+                <p><strong>Score de confiance :</strong> <span id="final-confidence">0%</span></p>
+            </div>
+
+            <div class="results-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Rang</th>
+                            <th>Description</th>
+                            <th>Genre</th>
+                            <th>Catégorie</th>
+                            <th>Score</th>
+                            <th>Confiance</th>
+                        </tr>
+                    </thead>
+                    <tbody id="results-tbody">
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="results-actions">
+                <button class="btn btn-primary" onclick="location.reload()">Nouveau classement</button>
+            </div>
+        </div>
+
+        <!-- Loading overlay -->
+        <div id="loading" class="loading hidden">
+            <div class="spinner"></div>
+            <p>Chargement...</p>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+
+</html>
