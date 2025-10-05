@@ -134,7 +134,8 @@ ranking_tool.load_films()
 
 @app.route("/")
 def index():
-    return render_template("index.html")
+    response = render_template("index.html")
+    return response
 
 
 @app.route("/start", methods=["POST"])

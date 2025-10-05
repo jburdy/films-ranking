@@ -301,6 +301,11 @@ body {
     z-index: 1000;
 }
 
+.loading.hidden {
+    display: none !important;
+    visibility: hidden !important;
+}
+
 .loading p {
     color: white;
     margin-top: 20px;
